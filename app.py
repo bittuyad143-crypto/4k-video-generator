@@ -4,7 +4,7 @@ import edge_tts
 from moviepy.editor import ImageClip,
 AudioFileClip, ColorClip
 import os
-st.set_page_config(page_title="4K Video Generator", page_icon="曾"，layout="centered")
+st.set_page_config(page_title="4K Video Generator", page_icon="曾",layout="centered")
 st.title("일 AI 4K Video Generator")st.write("Type your script, upload a thumbnail, and generate your 4K video instantly.")
 # User Inputs
 script_text =st.text_area("I s Script
