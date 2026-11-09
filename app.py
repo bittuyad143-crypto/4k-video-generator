@@ -2,82 +2,91 @@ import os
 import asyncio
 import edge_tts
 import streamlit as st
-from moviepy.editor import Imageclip,
-AudioFileClip,ColorClip
-st.set_page_config(page_title='4K
-Video Generator', layout='centered')
-st.title('AI 4K Video Generator')
-st.write('Type your script, upload a
-thumbnail, and generate your 4K
-video.')
-script_text =st.text_area('Script Text','Line 1:Hello WorldinLine 2:AI Video Test', height=150)
-voice_name = st.selectbox('Select
-Voice Actor', ['en-US-
-ChristopherNeural', 'en-US-GuyNeural','en-US- JennyNeural'，''en-GB-
-RyanNeural'])
-uploaded_file=
-st.file_uploader('Upload Thumbnail Image', type=['jpg', 'jpeg', 'png'])if st.button('Generate 4K Video', type='primary')：
+from moviepy.editor import (
+ImageClip,
+AudioFileClip, 
+ColorClip
+）
+st.set_page_config(
+page_title="4K Generator", 
+layout="centered"
+(
+st.title("AI 4K Video Generator")
+script_text = st.text_area(
+"Script Text",
+"Line 1:Hello World\nLine 2：AI
+Video Test",
+height=120
+√
+voice_name = st.selectbox(
+"Voice Actor", 
+["en-US-ChristopherNeural", 
+"en-US-GuyNeural", 
+en-US- JennyNeural"]
+√
+uploaded_file = st.file_uploader(
+"Upload Thumbnail", 
+type=["jpg","jpeg","png"]
+√
+if st.button("Generate 4K Video", 
+type="primary")：
 if not script_text.strip()：
-st.error('Please enter a
-script first.')
+st.error("Please enter a
+script first.")
 else:
-with st.spinner('Generating
-Voiceover...')：
-audio_path
-=1
-'voiceover.mp3'
+with st.spinner("Generating
+Voiceover...")：
+audio_path=
+"voiceover.mp3"
 async def make_audio()：
-communicate =
-edge_tts.Communicate(script_text,
-voice_name)
+comm=
+edge_tts.Communicate(
+script_text,
+voice_name
+√
 await
-communicate.save(audio_path)
+comm.save(audio_path)
 asyncio.run(make_audio())
-with st.spinner('Rendering 4K
-Video...(Takes ~1-2 mins)')：
-audio_clip
-二
-AudioFileClip(audio_path)
-duration =
-audio_clip.duration
-thumbnail_path = None
+with st.spinner("Rendering 4K
+Video...")：
+audio=
+AudioFileclip(audio_path)
+dur = audio.duration
+t_path = None
 if uploaded_file is not
 None:
-thumbnail_path=
-f'temp_fuploaded_file.namey'
-with
-open(thumbnail_path, 'wb') as f:
+t_path=
+f"temp_fuploaded_file.namej"
+with open(t_path,
+"wb") as f:
 f.write(uploaded_file.getbuffer())
-TARGET WIDTH = 3840
-TARGET HEIGHT = 2160
-if thumbnail_path and
-os.path.exists(thumbnail_path)：
-bg_clip = Imageclip(th
-umbnail_path).set_duration(duration).r
-esize(newsize=(TARGET_WIDTH, 
-TARGET_ HEIGHT))
+WH= 3840，2160
+if t_path and
+os.path.exists(t_path)：
+bg= ImageClip(t_path)
+.set_duration(dur).resize((W, H))
 else:
-bg_clip=
-ColorClip(size=(TARGET_WIDTH, TARGET_HEIGHT), color=(0，0，0)).set_duration(duration)
-final_video =
-bg_clip.set_audio(audio_clip)
-output_filename=
-'final_output_4k.mp4'
-final_video.write_videofile(
-output_filename,
-fps=30， 
-codec='libx264'，audio_codec='aac', bitrate='15000k'
+bg= ColorClip((W, H)，
+color=(0，0， 0)).set_duration(dur)
+video=
+bg.set_audio(audio)
+output =
+"final_output_4k.mp4"
+video.write_videofile(
+output, 
+fps=30，
+codec="libx264", 
+audio_codec="aac", 
+bitrate="15000k"
 √
-st.success('4K Video Render
-Complete!')
-st.video(output_filename)
-?(.q)，
-with open(output_filename,
-as file:
+st.success("4K Video Render
+Complete!")
+st.video(output)
+with open(output, "rb")as f:
 st.download_button(
-label='Download 4K
-Video to Phone',
-data=file, 
-file_name='final_output_4k.mp4'，
-mime='video/mp4'
-                   )
+label="Download 4K
+Video to Phone", 
+data=f, 
+file_name=output, 
+mime="video/mp4"
+)
