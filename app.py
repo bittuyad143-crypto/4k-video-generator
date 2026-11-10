@@ -4,8 +4,7 @@ import edge_tts
 import streamlit as st
 from moviepy.editor import ImageClip, 
 AudioFileclip, ColorClip
-st.set_page_config(page_title="4K
-Generator", layout="centered")
+st.set_page_config(page_title="4K Generator", layout="centered")
 st.title("AI 4K Video Generator")
 script_text =st.text_area("Script Text", "Line 1:Hello WorldlnLine 2:AI Video Test", height=120)
 voice_name = st.selectbox("Voice
