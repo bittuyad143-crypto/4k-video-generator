@@ -1,5 +1,11 @@
 import os
 from PIL import Image
+
+# Compatibility patch for Pillow 10+ and MoviePy
+if not hasattr(Image, 'ANTIALIAS'):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
+    import os
+from PIL import Image
 if not hasattr(Image, 'ANTIALIAS'):
     Image.ANTIALIAS = Image.Resampling.LANCZOS
     import os
