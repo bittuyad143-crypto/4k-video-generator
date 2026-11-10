@@ -1,4 +1,7 @@
-import os
+from PIL import Image
+if not hasattr(Image, 'ANTIALIAS'):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
+    import os
 import asyncio
 import edge_tts
 import streamlit as st
